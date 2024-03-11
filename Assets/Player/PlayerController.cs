@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject BulletPrefab;
     [SerializeField] GameObject ExplosionPrefab;
     [SerializeField] float Timeout = 15f;
+    [SerializeField] AudioClip launchSound;
+    [SerializeField] AudioClip countdownSound;
 
     int AutoDirection = 1;
     float AutoBulletTime;   //time to auto instantiate a new bullet
@@ -21,6 +23,8 @@ public class PlayerController : MonoBehaviour
     float initializingTime;
     Animator animator;
     BoxCollider2D playerCollider;
+    AudioSource audioSource;
+    GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -28,11 +32,21 @@ public class PlayerController : MonoBehaviour
         AutoBulletTime = Time.time + Random.Range(AutoBulletMinPeriod, AutoBulletMaxPeriod);
         animator = GetComponent<Animator>();
         playerCollider = GetComponent<BoxCollider2D>();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = launchSound;
+        timeoutTime = Time.time + Timeout;
+        gameManager = FindObjectOfType<GameManager>();
+
+        //disable the collider
+        GameManager.bAutonomous = true;
+        playerCollider.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.bGameOver) return;
+
         if (GameManager.bAutonomous)
         {
             autonomousUpdate();
@@ -66,7 +80,7 @@ public class PlayerController : MonoBehaviour
         AutoBullet();
 
         //exit autonomous mode if a key is pressed
-        if (Input.anyKeyDown)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             GameManager.bAutonomous = false;
             Initialize();
@@ -85,8 +99,9 @@ public class PlayerController : MonoBehaviour
         //play the countdown animation
         animator.SetTrigger("Start");
 
-        //disable the collider
-        playerCollider.enabled = false;
+        audioSource.clip = countdownSound;
+        audioSource.Play();
+
     }
 
     void userControlsUpdate()
@@ -97,6 +112,8 @@ public class PlayerController : MonoBehaviour
 
             bInitializing = false;
             timeoutTime = Time.time + Timeout;
+            
+            audioSource.clip = launchSound;
 
             //enable the collider
             playerCollider.enabled = true;
@@ -117,9 +134,10 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector2(LeftLimit, transform.position.y);
         }
 
-        if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))
+        if (/*Input.GetButtonDown("Fire1") || */ Input.GetKeyDown(KeyCode.Space))
         {
             InstantiateBullet();
+            audioSource.Play();
         }
 
         if (Input.anyKey) timeoutTime = Time.time + Timeout;
@@ -127,6 +145,7 @@ public class PlayerController : MonoBehaviour
         if (Time.time > timeoutTime)
         {
             GameManager.bAutonomous = true;
+            playerCollider.enabled = false;
         }
     }
 
@@ -146,6 +165,7 @@ public class PlayerController : MonoBehaviour
             var exp = Instantiate(ExplosionPrefab, transform.position, transform.rotation);
             exp.transform.localScale = 0.5f * Vector3.one;  //reduce the size of the explosion
             Initialize();
+            gameManager.PlayerHit();
         }
     }
 

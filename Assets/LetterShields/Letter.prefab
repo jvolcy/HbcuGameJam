@@ -4949,7 +4949,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3154207339829435758}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4508d724045024c52bc05f337c73e17a, type: 3}
+  m_Script: {fileID: 11500000, guid: c50b6397b2d9549018f4b027116b9577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ps: {fileID: 7993971422028641100}
@@ -4957,6 +4957,7 @@ MonoBehaviour:
   explosionScale: 0.5
   ExplosionPrefab: {fileID: 8217569278386207814, guid: 46efdd54a625e4947900a4d8b5f22e0c, type: 3}
   explosionOffest: {x: 0, y: 0, z: 0}
+  bShieldDown: 0
 --- !u!50 &2487681999830989313
 Rigidbody2D:
   serializedVersion: 4

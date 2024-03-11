@@ -194,6 +194,7 @@ MonoBehaviour:
   travelEndPointVariance: 10
   travelMinSpeed: 4
   travelMaxSpeed: 8
+  audioVolume: 0.6
   ExplosionPrefab: {fileID: 8217569278386207814, guid: 46efdd54a625e4947900a4d8b5f22e0c, type: 3}
   animateBackgroiund: 0
 --- !u!61 &505631446077761719

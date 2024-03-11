@@ -10,3 +10,27 @@ https://www.istockphoto.com/photo/side-view-of-airship-isolated-on-white-backgro
 Airplane sound
 https://freesound.org/people/alex36917/sounds/571919/
 
+Help button
+https://www.svgrepo.com/svg/106855/round-help-button
+
+Rocket launch sound
+https://freesound.org/people/ProjectsU012/sounds/340978/
+
+UFO sound
+https://freesound.org/people/Calmarius/sounds/66085/
+
+Countdown sound
+https://freesound.org/people/thomas_evdokimoff/sounds/202193/
+
+
+<align="center"><b><size=+8>HBCU Game Jam</size></b></align>
+An evil blimp is hovering over the skies at the AUC and shooting down
+anti-creativity rays in an attempt to ruin the HBCU Game Jam.
+Your mission is to destroy the blimp and save the hackathon.
+To do this, you must first take down the 11 shields that protect the blimp.
+Each shield is temporarily disabled when hit.  When all shields are down,
+the blimp is vulnerable to attack.  This is your chance to destroy it and
+save the day!  Beware, the blimp is defended by a fleet of planes ready to
+repel any attackers.  Good luck!
+
+<align="center"><size=15>credits go here</size></align>

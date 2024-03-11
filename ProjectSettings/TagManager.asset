@@ -57,3 +57,6 @@ TagManager:
   - name: Foreground
     uniqueID: 697272697
     locked: 0
+  - name: Near Foreground
+    uniqueID: 2750816725
+    locked: 0

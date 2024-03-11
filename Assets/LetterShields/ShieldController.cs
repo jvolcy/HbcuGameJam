@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LetterController : MonoBehaviour
+public class ShieldController : MonoBehaviour
 {
     BoxCollider2D boxCollider;
     Animator animator;
@@ -13,7 +13,7 @@ public class LetterController : MonoBehaviour
     [SerializeField] Vector3 explosionOffest;
 
     float RestoreTime = 0;  //the future time when we will restore the destroyed letter
-    bool bNeedRestoration = false;
+    public bool bShieldDown = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +32,7 @@ public class LetterController : MonoBehaviour
         }
         */
 
-        if (bNeedRestoration && Time.time > RestoreTime)
+        if (bShieldDown && Time.time > RestoreTime)
         {
             RestoreLetter();
         }
@@ -43,7 +43,7 @@ public class LetterController : MonoBehaviour
     {
         ps.Play();
         animator.SetBool("Fade", true);
-        bNeedRestoration = true;
+        bShieldDown = true;
         RestoreTime = Time.time + RestoreDelay;
         boxCollider.enabled = false;    //disable the collider
 
@@ -56,7 +56,7 @@ public class LetterController : MonoBehaviour
     void RestoreLetter()
     {
         animator.SetBool("Fade", false);
-        bNeedRestoration = false;
+        bShieldDown = false;
         boxCollider.enabled = true; //enable the collider
     }
 

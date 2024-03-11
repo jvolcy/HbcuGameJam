@@ -22,10 +22,12 @@ public class PlaneController : MonoBehaviour
     [SerializeField] float travelEndPointVariance = 10f;
     [SerializeField] float travelMinSpeed = 1f;
     [SerializeField] float travelMaxSpeed = 4f;
+    [SerializeField] float audioVolume = 0.8f;
+    [SerializeField] bool isBlimp = false;
 
     //explosion inspector parameters
     [SerializeField] GameObject ExplosionPrefab;
-    [SerializeField] bool animateBackgroiund = false;
+    //[SerializeField] bool animateBackgroiund = false;
 
     //travel members
     float traveSpeed;
@@ -42,7 +44,7 @@ public class PlaneController : MonoBehaviour
     BoxCollider2D mCollider;
     SpriteRenderer[] childrenSprites;   //sprites of child objects
     AudioSource audioSource;
-
+    GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -61,12 +63,19 @@ public class PlaneController : MonoBehaviour
 
         //explosion
 
+        gameManager = FindObjectOfType<GameManager>();
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.bGameOver)
+        {
+            audioSource.enabled = false;
+            return;
+        }
+
         //travel
         transform.Translate(traveSpeed * Time.deltaTime * Vector2.right);
 
@@ -85,7 +94,7 @@ public class PlaneController : MonoBehaviour
         if (bExploded)
             audioSource.volume = 0.05f;
         else
-            audioSource.volume = Mathf.Clamp((10f - Mathf.Abs(transform.position.x)) / 10f, 0.05f, 1f);
+            audioSource.volume = audioVolume * Mathf.Clamp((10f - Mathf.Abs(transform.position.x)) / 10f, 0.05f, 1f);
 
         //bomb
         //only drop bombs if we are not exploded
@@ -150,6 +159,15 @@ public class PlaneController : MonoBehaviour
         {
             //Destroy(collision.gameObject);  //destroy the bullet
             explode();
+
+            if (isBlimp)
+            {
+                gameManager.BlimpHit();
+            }
+            else
+            {
+                gameManager.PlaneHit();
+            }
         }
     }
 
@@ -167,7 +185,19 @@ public class PlaneController : MonoBehaviour
 
         mCollider.enabled = false; //disable the collider
 
-        if (animateBackgroiund) GameManager.AnimateBackground();
+    }
+
+
+    public void Reset()
+    {
+        //travel
+        StartRandomTravel();
+
+        //bomb
+        AutoBombTime = Time.time + Random.Range(bombMinPeriod, bombMaxPeriod);
+
+        audioSource.enabled = true;
+
     }
 
 }
