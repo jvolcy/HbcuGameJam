@@ -1590,6 +1590,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2612455565413373092, guid: 76f5a2e5a2af84f51a1946170752408b, type: 3}
+      propertyPath: m_text
+      value: '<align="center"><b><size=+8>HBCU Game Jam</size></b></align>
+
+        An
+        evil blimp is hovering over the skies at the AUC and shooting down anti-creativity
+        rays in an attempt to ruin the HBCU Game Jam.  Your mission is to destroy
+        the blimp and save the hackathon.  To do this, you must first take down the
+        11 shields that protect the blimp.  Each shield is temporarily disabled when
+        hit.  When all shields are down, the blimp is vulnerable to attack.  This
+        is your chance to destroy it and save the day!  Beware, the blimp is defended
+        by a fleet of planes ready to repel any attackers.  Good luck!
+
+
+        <align="center"><size=-12>(c)
+        2024 Spelman Innovation Lab</size></align>'
+      objectReference: {fileID: 0}
     - target: {fileID: 4853886973786319919, guid: 76f5a2e5a2af84f51a1946170752408b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1612,7 +1629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9047189195304353794, guid: 76f5a2e5a2af84f51a1946170752408b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 264.24805
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2462,6 +2479,7 @@ MonoBehaviour:
   - {fileID: 86067177}
   - {fileID: 177533778}
   Score: {fileID: 1984285949}
+  numLives: 0
 --- !u!4 &1626830587
 Transform:
   m_ObjectHideFlags: 0
@@ -3390,6 +3408,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3773736520887051405, guid: a14504bcfbf184cd5b31d45f3f43b24b, type: 3}
       propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5055362000313207058, guid: a14504bcfbf184cd5b31d45f3f43b24b, type: 3}
+      propertyPath: isBlimp
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5055362000313207058, guid: a14504bcfbf184cd5b31d45f3f43b24b, type: 3}

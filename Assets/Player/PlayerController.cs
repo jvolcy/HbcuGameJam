@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
         AutoBullet();
 
         //exit autonomous mode if a key is pressed
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown( KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             GameManager.bAutonomous = false;
             Initialize();
@@ -164,8 +164,17 @@ public class PlayerController : MonoBehaviour
         {
             var exp = Instantiate(ExplosionPrefab, transform.position, transform.rotation);
             exp.transform.localScale = 0.5f * Vector3.one;  //reduce the size of the explosion
-            Initialize();
             gameManager.PlayerHit();
+
+            if (gameManager.numLives > 0)
+            {
+                Initialize();
+            }
+            else
+            {
+                //game over: place us in the middle of the screen
+                transform.position = new Vector2(0, transform.position.y);
+            }
         }
     }
 

@@ -116,11 +116,13 @@ public class PlaneController : MonoBehaviour
 
 
         //explosion
+        /*
         if (Input.GetKeyDown(KeyCode.X))
         {
             //for debugging: manually invoke the explode() function
             explode();
         }
+        */
 
     }
 

@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     //static GameObject mRestartButton;
     ShieldController[] mShields;
 
-    int numLives;
+    public int numLives;
     int score = 0;
     // Start is called before the first frame update
     void Start()
@@ -88,12 +88,17 @@ public class GameManager : MonoBehaviour
         RestartButton.SetActive(false);
         bGameOver = false;
 
+        ResetPlanes();
+
+    }
+
+    void ResetPlanes()
+    {
         var pcs = FindObjectsOfType<PlaneController>();
         foreach (var pc in pcs)
         {
             pc.Reset();
         }
-
     }
 
     void UpdateUI()
@@ -123,7 +128,14 @@ public class GameManager : MonoBehaviour
         numLives--;
         UpdateUI();
 
-        if (numLives == 0) Lose();
+        if (numLives == 0)
+        {
+            Lose();
+        }
+        else
+        {
+            ResetPlanes();
+        }
     }
 
     public void BlimpHit()
